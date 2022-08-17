@@ -38,12 +38,15 @@ public class FileDownloadExecutors {
 
 //    系统中的newCachedThreadPool
 //    及时性，不需要等待
+//    执行很多短期任务
+//    任务量不多，不然会一次性开很多线程
     public static ThreadPoolExecutor newCachedThreadPool(String prefix) {
         return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
                 DEFAULT_IDLE_SECOND, TimeUnit.SECONDS,
                 new SynchronousQueue<Runnable>(), new FileDownloadThreadFactory(prefix));
     }
     //    需要等待
+//    执行长期的任务，性能好很多
     public static ThreadPoolExecutor newDefaultThreadPool(int nThreads, String prefix) {
         return newFixedThreadPool(nThreads, new LinkedBlockingQueue<Runnable>(), prefix);
     }

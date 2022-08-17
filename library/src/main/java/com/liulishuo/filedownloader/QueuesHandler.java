@@ -168,6 +168,7 @@ class QueuesHandler implements IQueuesHandler {
             this.mList = list;
         }
 
+//        子线程中的handler，子线程中运行
         @Override
         public boolean handleMessage(final Message msg) {
             if (msg.what == WHAT_SERIAL_NEXT) {

@@ -199,8 +199,8 @@ class FileDownloadManager implements IThreadPoolMonitor {
                         .setWifiRequired(isWifiRequired)
                         .setMaxRetryTimes(autoRetryTimes)
                         .build();
-
-        // - execute
+//        每个下载任务调用一次
+//        必须在线程池中进行，有尝试请求部分，查找数据库部分
         mThreadPool.execute(runnable);
 
     }

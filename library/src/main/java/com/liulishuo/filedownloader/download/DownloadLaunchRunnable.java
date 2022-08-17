@@ -298,9 +298,11 @@ public class DownloadLaunchRunnable implements Runnable, ProcessCallback {
                     isSingleConnection = connectionCount == 1;
                     if (isSingleConnection) {
                         // single connection
+//                        单连接是没有多开子线程的
                         realDownloadWithSingleConnection(totalLength);
                     } else {
                         // multiple connection
+//                        多连接是开了线程池的
                         statusCallback.onMultiConnection();
                         if (isResumeAvailableOnDB) {
                             realDownloadWithMultiConnectionFromResume(connectionCount,
@@ -408,6 +410,7 @@ public class DownloadLaunchRunnable implements Runnable, ProcessCallback {
         return defaultConnectionCount;
     }
 
+//    更新isResumeAvailableOnDB是否可断点续传变量
     void inspectTaskModelResumeAvailableOnDB(List<ConnectionModel> connectionOnDBList) {
         // check resume available
         final long offset;
@@ -673,6 +676,7 @@ public class DownloadLaunchRunnable implements Runnable, ProcessCallback {
 
 
 //    创建DownloadRunnable，每个DownloadRunnable就是一个连接，调用DOWNLOAD_EXECUTOR.invokeAll
+//    选择的是CachedThreadPool，为什么？及时开始下载，且开的线程不多
     private void fetchWithMultipleConnection(final List<ConnectionModel> connectionModelList,
                                              final long totalLength) throws InterruptedException {
         final int id = model.getId();
@@ -769,7 +773,8 @@ public class DownloadLaunchRunnable implements Runnable, ProcessCallback {
             model.setStatus(FileDownloadStatus.paused);
             return;
         }
-
+//      必须要调用线程池来运行，因为连接有很多个，每个都在子线程的一个单独的子线程中运行
+//        如果不用线程池，就只能在一个子线程中串行执行
         List<Future<Object>> subTaskFutures = DOWNLOAD_EXECUTOR.invokeAll(subTasks);
         if (FileDownloadLog.NEED_LOG) {
             for (Future<Object> future : subTaskFutures) {
