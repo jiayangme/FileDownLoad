@@ -134,7 +134,7 @@ class FileDownloadTaskLauncher {
 
         private void init() {
             mWorkQueue = new LinkedBlockingQueue<>();
-            mPool = FileDownloadExecutors.newDefaultThreadPool(3, mWorkQueue, "LauncherTask");
+            mPool = FileDownloadExecutors.newFixedThreadPool(3, mWorkQueue, "LauncherTask");
         }
 
     }

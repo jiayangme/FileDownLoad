@@ -79,8 +79,10 @@ public class FetchDataTask {
 
 //    往文件中写入下载数据
 //    写入过程被pause，立马return。
-//    写入过程中，回调callback.onProgress(byteCount);
+//    写入过程中，每读取一次数据，回调callback.onProgress(byteCount);
 //    写完回调callback.onCompleted(hostRunnable, startOffset, endOffset);
+//    这里是多线程并发写入文件, FileDownloadModel model却只有一个
+//    pause暂停，有可能下载的数据还没全部写入文件
     public void run() throws IOException, IllegalAccessException, IllegalArgumentException,
             FileDownloadGiveUpRetryException {
 
@@ -154,6 +156,7 @@ public class FetchDataTask {
                 // callback progress
                 callback.onProgress(byteCount);
 
+//                每写入一次数据到文件，更新数据库中的connectionMode，以便于后续断点续传
                 checkAndSync();
 
                 // check status
@@ -199,6 +202,7 @@ public class FetchDataTask {
         }
 
         // callback completed
+//        这个回调不是全局消息机制的completed状态回调
         callback.onCompleted(hostRunnable, startOffset, endOffset);
     }
 

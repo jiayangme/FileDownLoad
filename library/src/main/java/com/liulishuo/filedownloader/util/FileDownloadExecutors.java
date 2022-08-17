@@ -36,19 +36,23 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class FileDownloadExecutors {
     private static final int DEFAULT_IDLE_SECOND = 15;
 
-    public static ThreadPoolExecutor newFixedThreadPool(String prefix) {
+//    系统中的newCachedThreadPool
+//    及时性，不需要等待
+    public static ThreadPoolExecutor newCachedThreadPool(String prefix) {
         return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
                 DEFAULT_IDLE_SECOND, TimeUnit.SECONDS,
                 new SynchronousQueue<Runnable>(), new FileDownloadThreadFactory(prefix));
     }
-
+    //    需要等待
     public static ThreadPoolExecutor newDefaultThreadPool(int nThreads, String prefix) {
-        return newDefaultThreadPool(nThreads, new LinkedBlockingQueue<Runnable>(), prefix);
+        return newFixedThreadPool(nThreads, new LinkedBlockingQueue<Runnable>(), prefix);
     }
 
-    public static ThreadPoolExecutor newDefaultThreadPool(int nThreads,
-                                                          LinkedBlockingQueue<Runnable> queue,
-                                                          String prefix) {
+//    默认线程池为系统中的newFixedThreadPool
+//    需要等待
+    public static ThreadPoolExecutor newFixedThreadPool(int nThreads,
+                                                        LinkedBlockingQueue<Runnable> queue,
+                                                        String prefix) {
         final ThreadPoolExecutor executor = new ThreadPoolExecutor(nThreads, nThreads,
                 DEFAULT_IDLE_SECOND, TimeUnit.SECONDS, queue,
                 new FileDownloadThreadFactory(prefix));

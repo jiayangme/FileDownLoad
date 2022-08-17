@@ -106,7 +106,7 @@ public class DownloadLaunchRunnable implements Runnable, ProcessCallback {
     private boolean isSingleConnection;
 
     private static final ThreadPoolExecutor DOWNLOAD_EXECUTOR = FileDownloadExecutors
-            .newFixedThreadPool("ConnectionBlock");
+            .newCachedThreadPool("ConnectionBlock");
 
     private boolean isResumeAvailableOnDB;
     private boolean acceptPartial;
@@ -199,6 +199,9 @@ public class DownloadLaunchRunnable implements Runnable, ProcessCallback {
 
 //    进行分块。
 //    这里的线程池，是为了分发每个connection，DOWNLOAD_EXECUTOR.invokeAll(subTasks);
+//    发送completed回调状态消息
+//    这个run运行完，表示文件下载完成
+//    run运行中pause=true，结束发送pause状态回调，修改数据库
     @Override
     public void run() {
         try {
@@ -669,7 +672,7 @@ public class DownloadLaunchRunnable implements Runnable, ProcessCallback {
     }
 
 
-//    创建DownloadRunnable，调用DOWNLOAD_EXECUTOR.invokeAll
+//    创建DownloadRunnable，每个DownloadRunnable就是一个连接，调用DOWNLOAD_EXECUTOR.invokeAll
     private void fetchWithMultipleConnection(final List<ConnectionModel> connectionModelList,
                                              final long totalLength) throws InterruptedException {
         final int id = model.getId();
@@ -677,6 +680,9 @@ public class DownloadLaunchRunnable implements Runnable, ProcessCallback {
         final String url = redirectedUrl != null ? redirectedUrl : model.getUrl();
         final String path = model.getTempFilePath();
 
+//        FileDownloadLog.e(this,
+//                "fetch data with multiple connection(count: [%d]) for task[%d] totalLength[%d]",
+//                connectionModelList.size(), id, totalLength);
         if (FileDownloadLog.NEED_LOG) {
             FileDownloadLog.d(this,
                     "fetch data with multiple connection(count: [%d]) for task[%d] totalLength[%d]",
@@ -942,6 +948,7 @@ public class DownloadLaunchRunnable implements Runnable, ProcessCallback {
                     targetFilePath);
 
             // whether the file with the filename has been existed.
+//            下载文件已经存在，直接发出completed状态回调
             if (FileDownloadHelper.inspectAndInflowDownloaded(id,
                     targetFilePath, isForceReDownload, false)) {
                 database.remove(id);
@@ -964,6 +971,7 @@ public class DownloadLaunchRunnable implements Runnable, ProcessCallback {
                     throw new DiscardSafely();
                 }
 
+//                从数据库中获取连接列表
                 final List<ConnectionModel> connectionModelList = database
                         .findConnectionModel(fileCaseId);
 
@@ -979,7 +987,7 @@ public class DownloadLaunchRunnable implements Runnable, ProcessCallback {
                     model.setConnectionCount(fileCaseModel.getConnectionCount());
                     database.update(model);
 
-                    // re connect to resume from breakpoint.
+                    // reconnect to resume from breakpoint.
                     if (connectionModelList != null) {
                         for (ConnectionModel connectionModel : connectionModelList) {
                             connectionModel.setId(id);

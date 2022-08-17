@@ -379,6 +379,8 @@ public class DownloadStatusCallback implements Handler.Callback {
         }
     }
 
+//    更新数据库FileDownloadModel
+//    发送completed回调状态消息
     private void handleCompleted() throws IOException {
         renameTempFile();
 
