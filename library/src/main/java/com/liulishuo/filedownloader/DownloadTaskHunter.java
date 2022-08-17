@@ -351,6 +351,7 @@ public class DownloadTaskHunter implements ITaskHunter, ITaskHunter.IStarter,
 //    通知lifeCycle的onBegin回调
     @Override
     public void intoLaunchPool() {
+//        这里为什么要synchronized？
         synchronized (mPauseLock) {
             if (mStatus != FileDownloadStatus.INVALID_STATUS) {
                 FileDownloadLog.w(this, "High concurrent cause, this task %d will not input "
