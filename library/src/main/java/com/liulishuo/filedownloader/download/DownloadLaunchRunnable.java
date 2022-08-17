@@ -196,6 +196,8 @@ public class DownloadLaunchRunnable implements Runnable, ProcessCallback {
         inspectTaskModelResumeAvailableOnDB(connectionOnDBList);
         statusCallback.onPending();
     }
+    
+
 
 //    进行分块。
 //    这里的线程池，是为了分发每个connection，DOWNLOAD_EXECUTOR.invokeAll(subTasks);
