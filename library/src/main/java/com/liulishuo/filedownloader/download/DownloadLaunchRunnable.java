@@ -450,6 +450,7 @@ public class DownloadLaunchRunnable implements Runnable, ProcessCallback {
         }
     }
 
+//    执行connected状态回调
     private void handleTrialConnectResult(Map<String, List<String>> requestHeader,
                                           ConnectTask connectTask,
                                           FileDownloadConnection connection)
