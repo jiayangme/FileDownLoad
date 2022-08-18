@@ -341,6 +341,7 @@ public class DownloadLaunchRunnable implements Runnable, ProcessCallback {
                 statusCallback.onErrorDirectly(errorException);
             } else {
                 try {
+//                    FileDownloadLog.e(this, "completedDirectly = %s", "test");
                     statusCallback.onCompletedDirectly();
                 } catch (IOException e) {
                     statusCallback.onErrorDirectly(e);
@@ -775,7 +776,9 @@ public class DownloadLaunchRunnable implements Runnable, ProcessCallback {
         }
 //      必须要调用线程池来运行，因为连接有很多个，每个都在子线程的一个单独的子线程中运行
 //        如果不用线程池，就只能在一个子线程中串行执行
+//        调度在这里会阻塞当前线程
         List<Future<Object>> subTaskFutures = DOWNLOAD_EXECUTOR.invokeAll(subTasks);
+//        FileDownloadLog.e(this, "subTaskFutures = %s", "test 3");
         if (FileDownloadLog.NEED_LOG) {
             for (Future<Object> future : subTaskFutures) {
                 FileDownloadLog.d(this, "finish sub-task for [%d] %B %B",

@@ -164,7 +164,7 @@ public class DownloadRunnable implements Runnable {
                 if (connection != null) connection.ending();
             }
         } while (true);
-
+//        FileDownloadLog.e(this, "run = %s", "test 2");
     }
 
     private long getDownloadedOffset() {
