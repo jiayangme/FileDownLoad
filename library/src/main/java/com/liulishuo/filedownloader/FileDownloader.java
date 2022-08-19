@@ -37,7 +37,8 @@ import java.io.File;
 import java.util.List;
 
 /**
- * The basic entrance for FileDownloader.
+ * The basic entrance for FileDownloader
+ * test
  *
  * @see com.liulishuo.filedownloader.services.FileDownloadService The service for FileDownloader.
  * @see FileDownloadProperties
