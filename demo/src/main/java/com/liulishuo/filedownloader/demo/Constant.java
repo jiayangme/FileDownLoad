@@ -12,6 +12,7 @@ public interface Constant {
     String LIULISHUO_APK_URL = "http://cdn.llsapp.com/android/LLS-v4.0-595-20160908-143200.apk";
     String LIULISHUO_CONTENT_DISPOSITION_FILENAME = "LLS-v4.0-595-20160908-143200.apk";
 
+    
     String[] BIG_FILE_URLS = {
             "http://www.pc6.com/down.asp?id=72873",
             "http://cdn.llsapp.com/user_images/FEFC55C5-1E8F-45C6-AA4E-79FC79F97B6F",
