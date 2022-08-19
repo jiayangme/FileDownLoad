@@ -89,6 +89,7 @@ public class DownloadTaskHunter implements ITaskHunter, ITaskHunter.IStarter,
 //    在子线程中执行
     @Override
     public boolean updateMoreLikelyCompleted(MessageSnapshot snapshot) {
+//        getRunningTask()和getOrigin()返回同一个对象
         if (!FileDownloadStatus.isMoreLikelyCompleted(mTask.getRunningTask().getOrigin())) {
             return false;
         }

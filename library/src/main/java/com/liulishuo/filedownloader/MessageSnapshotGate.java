@@ -32,6 +32,7 @@ public class MessageSnapshotGate implements MessageSnapshotFlow.MessageReceiver 
     private boolean transmitMessage(List<BaseDownloadTask.IRunningTask> taskList,
                                     MessageSnapshot snapshot) {
 
+//        处理completed消息回调
         if (taskList.size() > 1 && snapshot.getStatus() == FileDownloadStatus.completed) {
             for (BaseDownloadTask.IRunningTask task : taskList) {
                 synchronized (task.getPauseLock()) {
@@ -43,6 +44,7 @@ public class MessageSnapshotGate implements MessageSnapshotFlow.MessageReceiver 
             }
         }
 
+//        只要是保持流动都处理
         for (BaseDownloadTask.IRunningTask task : taskList) {
             synchronized (task.getPauseLock()) {
                 if (task.getMessageHandler().updateKeepFlow(snapshot)) {

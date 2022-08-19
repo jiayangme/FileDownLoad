@@ -162,6 +162,7 @@ public class FileDownloadUtils {
         }
     }
 
+//    文件名用MD5方式生成
     public static String getDefaultSaveFilePath(final String url) {
         return generateFilePath(getDefaultSaveRootPath(), generateFileName(url));
     }

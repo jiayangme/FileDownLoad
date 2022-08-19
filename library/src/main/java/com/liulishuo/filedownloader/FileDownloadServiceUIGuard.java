@@ -45,6 +45,7 @@ import com.liulishuo.filedownloader.util.FileDownloadLog;
  *
  * @see FileDownloadServiceSharedTransmit
  */
+//访问远程service，并且处理回调
 class FileDownloadServiceUIGuard extends
         BaseFileServiceUIGuard<FileDownloadServiceUIGuard.FileDownloadServiceCallback,
                 IFileDownloadIPCService> {

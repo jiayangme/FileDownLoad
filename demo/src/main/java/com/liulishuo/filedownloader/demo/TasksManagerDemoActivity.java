@@ -40,6 +40,7 @@ import com.liulishuo.filedownloader.FileDownloadListener;
 import com.liulishuo.filedownloader.FileDownloadSampleListener;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.model.FileDownloadStatus;
+import com.liulishuo.filedownloader.util.FileDownloadLog;
 import com.liulishuo.filedownloader.util.FileDownloadUtils;
 
 import java.io.File;
@@ -386,6 +387,7 @@ public class TasksManagerDemoActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
+//            FileDownloadLog.e(this, "item count = %d", TasksManager.getImpl().getTaskCounts());
             return TasksManager.getImpl().getTaskCounts();
         }
     }
@@ -414,13 +416,15 @@ public class TasksManagerDemoActivity extends AppCompatActivity {
         }
 
         private void initDemo() {
-            if (modelList.size() <= 0) {
+//            if (modelList.size() <= 0) {
                 final int demoSize = Constant.BIG_FILE_URLS.length;
                 for (int i = 0; i < demoSize; i++) {
                     final String url = Constant.BIG_FILE_URLS[i];
-                    addTask(url);
+                    TasksManagerModel tasksManagerModel = addTask(url);
+//                    FileDownloadLog.e(this,
+//                            "initDemo url = %s ", tasksManagerModel.url);
                 }
-            }
+//            }
         }
 
         private SparseArray<BaseDownloadTask> taskSparseArray = new SparseArray<>();
@@ -462,7 +466,6 @@ public class TasksManagerDemoActivity extends AppCompatActivity {
                             || activityWeakReference.get() == null) {
                         return;
                     }
-
                     activityWeakReference.get().postNotifyDataChanged();
                 }
 
@@ -472,7 +475,6 @@ public class TasksManagerDemoActivity extends AppCompatActivity {
                             || activityWeakReference.get() == null) {
                         return;
                     }
-
                     activityWeakReference.get().postNotifyDataChanged();
                 }
             };

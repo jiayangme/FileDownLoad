@@ -14,21 +14,18 @@ public interface Constant {
 
     String[] BIG_FILE_URLS = {
             "http://www.pc6.com/down.asp?id=72873",
-            "http://www.pc6.com/down.asp?id=72873",
-            "http://www.pc6.com/down.asp?id=72873",
-            "http://www.pc6.com/down.asp?id=72873",
-            "http://www.pc6.com/down.asp?id=72873",
-            "http://www.pc6.com/down.asp?id=72873",
-            "http://www.pc6.com/down.asp?id=72873",
-            "http://www.pc6.com/down.asp?id=72873",
-            "http://www.pc6.com/down.asp?id=72873",
-            "http://www.pc6.com/down.asp?id=72873",
-            "http://www.pc6.com/down.asp?id=72873",
-            "http://www.pc6.com/down.asp?id=72873",
-            "http://www.pc6.com/down.asp?id=72873",
-            "http://www.pc6.com/down.asp?id=72873",
-            "http://www.pc6.com/down.asp?id=72873",
-
+            "http://cdn.llsapp.com/user_images/FEFC55C5-1E8F-45C6-AA4E-79FC79F97B6F",
+            "https://imtt.dd.qq.com/16891/apk/31B9A529AA1A887EC29588579BAADA08.apk?" +
+                    "fsname=com.tencent.mtt_11.5.1.1046_11511500.apk&csr=1bbd",
+            "https://imtt.dd.qq.com/16891/apk/31B9A529AA1A887EC29588579BAADA08.apk?" +
+                    "fsname=com.tencent.mtt_11.5.1.1046_11511500.apk&csr=1bbd",
+            "https://storage.360buyimg.com/jdmobile/JDMALL-PC2.apk",
+            "https://0d242deacb2febc1979f8ce15b2f3a30.dlied1.cdntips.net/imtt.dd.qq.com/sjy.20002/sjy.00004/16891/apk/2E530A4ACCFD7AC31E2EBAF9FA9CC830." +
+                    "apk?mkey=62ef25a6dac19331&f=8ea4&fsname=com.jingyao.easybike_6.20.6_1062006.apk&hsr=4d5s&cip=218.193.181.196&proto=https",
+            "https://1eb8d6cfa1e38dbcf124525ef6b318d3.dlied1.cdntips.net/dldir1.qq.com/weixin/android/weixin8025android2200_arm64_1.apk?" +
+                    "mkey=62ef25d1dac19331&f=5844&cip=218.193.181.196&proto=https",
+            "https://storage.evozi.com/apk/dl/16/09/04/com.google.android.googlequicksearchbox_301100453.apk",
+            "https://storage.evozi.com/apk/dl/16/12/14/com.google.android.youtube_1522916800.apk"
     };
 //    String[] BIG_FILE_URLS = {
 //            // 5m

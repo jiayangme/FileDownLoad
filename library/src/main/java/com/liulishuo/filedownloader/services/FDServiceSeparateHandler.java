@@ -33,6 +33,7 @@ import java.lang.ref.WeakReference;
 /**
  * For handling the case of the FileDownloadService runs in separate `:filedownloader` process.
  */
+//运行在service端的进程中
 public class FDServiceSeparateHandler extends IFileDownloadIPCService.Stub
         implements MessageSnapshotFlow.MessageReceiver, IFileDownloadServiceHandler {
 

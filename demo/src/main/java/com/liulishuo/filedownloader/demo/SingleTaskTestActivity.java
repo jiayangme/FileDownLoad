@@ -179,6 +179,7 @@ public class SingleTaskTestActivity extends AppCompatActivity {
                 tag = new ViewHolder(new WeakReference<>(this), progressBar4, detailTv4, speedTv4, 4);
                 path = chunkedFilePath;
                 break;
+
         }
 
         return FileDownloader.getImpl().create(url)
