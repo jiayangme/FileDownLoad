@@ -41,6 +41,7 @@ import java.util.List;
  * A UI-Guard in Main-Process for IPC, which is the only Object can access the other process in
  * Main-Process with Binder.
  */
+//activity中和service进行通信的类
 public abstract class BaseFileServiceUIGuard<CALLBACK extends Binder, INTERFACE extends IInterface>
         implements IFileDownloadServiceProxy, ServiceConnection {
 
@@ -87,6 +88,7 @@ public abstract class BaseFileServiceUIGuard<CALLBACK extends Binder, INTERFACE 
             runnable.run();
         }
 
+        //service连接后，回调监听器connectedListener
         FileDownloadEventPool.getImpl().
                 asyncPublishInNewThread(new DownloadServiceConnectChangedEvent(
                         DownloadServiceConnectChangedEvent.ConnectStatus.connected, serviceClass));

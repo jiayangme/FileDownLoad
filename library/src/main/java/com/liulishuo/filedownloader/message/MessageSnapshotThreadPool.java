@@ -49,6 +49,7 @@ public class MessageSnapshotThreadPool {
         }
     }
 
+//    必须要加锁控制并发
     public void execute(final MessageSnapshot snapshot) {
         FlowSingleExecutor targetPool = null;
         try {
@@ -95,6 +96,7 @@ public class MessageSnapshotThreadPool {
         private final Executor mExecutor;
 
         public FlowSingleExecutor(int index) {
+//            一个线程的线程池
             mExecutor = FileDownloadExecutors.newDefaultThreadPool(1, "Flow-" + index);
         }
 
@@ -103,6 +105,8 @@ public class MessageSnapshotThreadPool {
         }
 
 //        执行在子线程的子线程中
+//        同时开5个线程池处理消息的流动，每个线程池处理相同id的消息，
+//        一个线程池无法应付到来的这么多子线程带来消息
 //        @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.P)
         public void execute(final MessageSnapshot snapshot) {
 //            FileDownloadLog.e(this,"execute process = %s",

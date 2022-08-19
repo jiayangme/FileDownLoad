@@ -136,7 +136,6 @@ class FileDownloadTaskLauncher {
             mWorkQueue = new LinkedBlockingQueue<>();
             mPool = FileDownloadExecutors.newFixedThreadPool(3, mWorkQueue, "LauncherTask");
         }
-
     }
 
     private static class LaunchTaskRunnable implements Runnable {

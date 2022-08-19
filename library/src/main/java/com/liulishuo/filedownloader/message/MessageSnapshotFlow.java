@@ -60,7 +60,7 @@ public class MessageSnapshotFlow {
 
     }
 
-// 消息接收者只有两个
+// 消息接收者有两个
     public interface MessageReceiver {
         void receive(MessageSnapshot snapshot);
     }

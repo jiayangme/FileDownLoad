@@ -45,6 +45,7 @@ import com.liulishuo.filedownloader.util.FileDownloadLog;
  *
  * @see FileDownloadServiceSharedTransmit
  */
+//访问远程service，并且处理回调
 class FileDownloadServiceUIGuard extends
         BaseFileServiceUIGuard<FileDownloadServiceUIGuard.FileDownloadServiceCallback,
                 IFileDownloadIPCService> {
@@ -79,6 +80,7 @@ class FileDownloadServiceUIGuard extends
 
     protected static class FileDownloadServiceCallback extends IFileDownloadIPCCallback.Stub {
 
+//        service的回调还是在子线程
         @Override
         public void callback(MessageSnapshot snapshot) throws RemoteException {
 //            FileDownloadLog.e(this, "UIGuard callback = %s", snapshot.toString());

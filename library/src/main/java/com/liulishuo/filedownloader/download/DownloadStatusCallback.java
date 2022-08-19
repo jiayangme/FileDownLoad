@@ -100,6 +100,7 @@ public class DownloadStatusCallback implements Handler.Callback {
     }
 
 //    每个task都对应一个DownloadStatusCallback
+//    onPending这个回调在service的主线程
     public void onPending() {
         model.setStatus(FileDownloadStatus.pending);
 

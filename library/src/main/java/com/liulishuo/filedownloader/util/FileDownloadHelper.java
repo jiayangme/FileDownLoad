@@ -77,8 +77,7 @@ public class FileDownloadHelper {
          * <p>
          * Important Ting: this method would be used on the FileDownloadService and the upper-layer,
          * so as default FileDownloadService is running on the `:filedownloader` process, and
-         * upper-layer
-         * is on the user process, in this case, if you want to cache something on this instance, it
+         * upper-layer is on the user process, in this case, if you want to cache something on this instance, it
          * would be two different caches on two processes.
          * <p>
          * Tips: if you want the FileDownloadService runs on the upper-layer process too, just
@@ -104,17 +103,14 @@ public class FileDownloadHelper {
     public interface ConnectionCountAdapter {
         /**
          * Before invoke this method to determine how many connection will be used to downloading
-         * this task,
-         * there are several conditions must be confirmed:
+         * this task, there are several conditions must be confirmed:
          * <p>
          * 1. the connection is support multiple connection(SUPPORT"Partial Content(206)" AND NOT
          * Chunked)
          * 2. the current {@link FileDownloadOutputStream} support seek(The default
          * one({@link FileDownloadRandomAccessFile} is support)
-         * 3. this is a new task NOT resume from breakpoint( If the task resume from breakpoint
-         * the connection count would be using
-         * the one you determined when the task
-         * first created ).
+         * 3. this is a new task NOT resume from breakpoint(If the task resume from breakpoint
+         * the connection count would be using the one you determined when the task first created ).
          * <p/>
          * The best strategy is refer to how much speed of each connection for the ip:port not file
          * size.
